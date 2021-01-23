@@ -1,7 +1,7 @@
 import React from 'react';
-
+import PageTitle from '../page-title/page-title';
 export class Favorites extends React.Component {
   render() {
-    return (<h1>Favorites</h1>);
+    return (<PageTitle title="Favorites" />);
   }
 }
