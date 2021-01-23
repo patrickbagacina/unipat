@@ -71,7 +71,7 @@ export class Universities extends React.Component {
           onFilter={this.handleFilter} />
         {
           loading 
-            ? <Loading label="Fetching universities" />
+            ? <Loading label="Fetching universities..." />
             : <UniversityList universities={universities} />
         }
       </div>

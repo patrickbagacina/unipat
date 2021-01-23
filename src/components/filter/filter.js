@@ -2,6 +2,7 @@ import React from 'react';
 import SearchableDropdown from '../searchable-dropdown/searchable-dropdown';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 export default class Filter extends React.Component {
   constructor(props) {
@@ -30,20 +31,33 @@ export default class Filter extends React.Component {
     const { dropdown, text, button, onFilter } = this.props;
     return (
       <div>
-        <SearchableDropdown 
-          label={dropdown.label} 
-          options={dropdown.options} 
-          onChange={this.handleDropdownChange} />
-        <TextField 
-          label={text.label} 
-          variant="outlined" 
-          onChange={this.handleTextChange} />
-        <Button 
-          variant="contained" 
-          color="primary" 
-          onClick={() => onFilter({dropdown: this.state.dropdown, text: this.state.text}) }>
-          {button.label}
-        </Button>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <SearchableDropdown 
+                  label={dropdown.label} 
+                  options={dropdown.options} 
+                  onChange={this.handleDropdownChange} />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField 
+                  fullWidth
+                  label={text.label} 
+                  variant="outlined" 
+                  onChange={this.handleTextChange} />
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Button 
+              variant="contained" 
+              color="primary" 
+              onClick={() => onFilter({dropdown: this.state.dropdown, text: this.state.text}) }>
+              {button.label}
+            </Button>
+          </Grid>
+        </Grid>
       </div>
     );
   }
