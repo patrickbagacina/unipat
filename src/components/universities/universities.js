@@ -1,10 +1,10 @@
 import React from 'react';
 import PageTitle from '../page-title/page-title';
-import SearchableDropdown from '../searchable-dropdown/searchable-dropdown';
-import counrties from '../../data/countries.json';
+import countries from '../../data/countries.json';
 import config from '../../config.json';
 import Loading from '../loading/loading';
 import UniversityList from './list';
+import Filter from '../filter/filter';
 
 export class Universities extends React.Component {
   constructor(props) {
@@ -12,30 +12,28 @@ export class Universities extends React.Component {
     this.state = {
       loading: true,
       universities: [],
-      country: null,
-      name: null,
       error: null,
     };
+
+    this.loadUniversities = this.loadUniversities.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
   }
 
   componentDidMount() {
     this.loadUniversities();
   }
 
-  getUrl() {
-    const { country, name } = this.state;
-    let url = `${config.server.baseUrl}/search`;
-
-    if (country || name) url.concat('?');
-    if (country) url.concat(`country=${country}`);
-    if (country && name) url.concat('&');
-    if (name) url.concat(`name=${name}`);
+  appendUrl(url, country, name) {
+    if (country != null || name != null) url = url.concat('?');
+    if (country != null) url = url.concat(`country=${country}`);
+    if (country != null && name != null) url = url.concat('&');
+    if (name != null) url = url.concat(`name=${name}`);
 
     return url;
   }
 
-  loadUniversities() {
-    fetch(this.getUrl())
+  loadUniversities(url = `${config.server.baseUrl}/search`) {
+    fetch(url)
       .then(res => res.json())
       .then(
         (result) => {
@@ -53,9 +51,12 @@ export class Universities extends React.Component {
       );
   }
 
-  handleChange(event) {
-    this.setState({loading: true});
-    console.log(event.target.innerText);
+  handleFilter(filter) {
+    this.setState({
+      loading: true,
+    });
+    const url = this.appendUrl(`${config.server.baseUrl}/search`, filter.dropdown, filter.text);
+    this.loadUniversities(url);
   }
 
   render() {
@@ -63,7 +64,11 @@ export class Universities extends React.Component {
     return (
       <div>
         <PageTitle title="Universities" />
-        <SearchableDropdown label="Country" options={counrties} onChange={this.handleChange}/>
+        <Filter  
+          dropdown={{label: 'Country', options: countries}}
+          text={{label: 'University Name'}} 
+          button={{label: 'Filter Universities'}}
+          onFilter={this.handleFilter} />
         {
           loading 
             ? <Loading label="Fetching universities" />
