@@ -12,7 +12,6 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Alert from '@material-ui/lab/Alert';
 import { Link } from 'react-router-dom';
-import data from '../../data/users.json';
 
 export class Register extends React.Component {
   constructor(props) {
@@ -46,15 +45,27 @@ export class Register extends React.Component {
   }
 
   isAvailable(username) {
-    const user = data.users.find((u) => u.username === username);
+    const u = localStorage.getItem('users');
+    if (!u) return true;
+
+    const users = JSON.parse(u);
+    const user = users.find((u) => u.username === username);
 
     if (user) return false;
 
     return true;
   }
 
-  saveToJson(username, password) {
-    
+  saveToStorage(username, password) {
+    const u = localStorage.getItem('users');
+    let users = [];
+    if (u) users = JSON.parse(u);
+
+    // push new user to users
+    users.push({username: username, password: password});
+
+    // write users to storage
+    localStorage.setItem('users', JSON.stringify(users));
   }
 
   handleSubmit() {
@@ -71,6 +82,7 @@ export class Register extends React.Component {
     }
 
     if (this.isAvailable(username)) {
+      this.saveToStorage(username, password);
       this.setState({
         errors: null,
         message: 'Successfully registered user! Please sign in to continue.'

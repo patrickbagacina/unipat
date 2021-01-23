@@ -1,6 +1,5 @@
 import React from 'react';
 import PageTitle from '../page-title/page-title';
-import data from '../../data/users.json';
 import Loading from '../loading/loading';
 export class Favorites extends React.Component {
   constructor(props) {
@@ -22,7 +21,10 @@ export class Favorites extends React.Component {
       return;
     }
     const currentUser = JSON.parse(cu);
-    const user = data.users.find((u) => u.username === currentUser.username);
+    const u = localStorage.getItem('users');
+    let users = [];
+    if (u) users = JSON.parse(u);
+    const user = users.find((u) => u.username === currentUser.username);
     if (user === null) {
       this.setState({
         loading: false,

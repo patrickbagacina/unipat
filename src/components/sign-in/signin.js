@@ -10,8 +10,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import data from '../../data/users.json';
 
 export class SignIn extends React.Component {
   constructor(props) {
@@ -21,7 +21,8 @@ export class SignIn extends React.Component {
       showPassword: false,
       password: null,
       username: null,
-      errors: null
+      errors: null,
+      success: null
     };
 
     this.togglePassword = this.togglePassword.bind(this);
@@ -44,9 +45,13 @@ export class SignIn extends React.Component {
   }
 
   authenticate(username, password) {
-    const user = data.users.find((u) => u.username === username && u.password === password);
+    const u = localStorage.getItem('users');
+    let users = [];
+    if (u) users = JSON.parse(u);
 
-    if (user) localStorage.setItem('currentUser', username);
+    const user = users.find((u) => u.username === username && u.password === password);
+
+    if (user) localStorage.setItem('currentUser', JSON.stringify(user));
 
     return user;
   }
@@ -66,7 +71,8 @@ export class SignIn extends React.Component {
 
     if (this.authenticate(username, password)) {
       this.setState({
-        errors: null
+        errors: null,
+        success: true
       });
     } else {
       this.setState({
@@ -78,9 +84,10 @@ export class SignIn extends React.Component {
   }
 
   render() {
-    const { showPassword, errors } = this.state;
+    const { showPassword, errors, success } = this.state;
     const passHasError = errors != null && errors.password !== null;
     const usernameHasError = errors != null && errors.username !== null;
+    if (success) return <Redirect to={'/'} />
     return (
       <Grid container spacing={3}>
         <Grid item xs={12}>
