@@ -15,7 +15,8 @@ export default function ViewLetter(props) {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Button 
-          color="primary" 
+          color="primary"
+          data-testid="btn-n-go-back"
           onClick={props.onBack}>
           Go Back
         </Button>

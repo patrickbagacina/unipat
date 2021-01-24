@@ -47,7 +47,7 @@ export class Newsletters extends React.Component {
     let content;
     if (loading) content = <Loading label="Fetching newsletters..." />;
     else if (view) content = <ViewLetter letter={view} onBack={this.handleBack} />
-    else if (letters.length === null) content = <Empty message="No Newsletters Added Yet." />;
+    else if (letters.length === 0) content = <Empty message="No Newsletters Added Yet." />;
     else content = <NewsletterList 
       letters={letters} 
       onSelect={this.handleSelect}

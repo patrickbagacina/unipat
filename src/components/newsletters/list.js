@@ -8,6 +8,7 @@ export default function NewsletterList(props) {
   const cards = letters.map((l) => {
     return <NewsletterCard 
       key={`${l.id}`}
+      btnKey={`${l.id}-btn-read`}
       date={l.date}
       name={l.school.name}
       country={l.school.country}

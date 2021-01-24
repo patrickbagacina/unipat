@@ -24,6 +24,7 @@ export default function NewsletterCard(props) {
           </Grid>
           <Grid item xs={12}>
             <Button 
+              data-testid={props.btnKey}
               size="small"
               color="primary" 
               onClick={props.onClick}>
@@ -59,6 +60,7 @@ export function TopicCard(props) {
 }
 
 NewsletterCard.propTypes = {
+  btnKey: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   country: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
