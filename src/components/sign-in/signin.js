@@ -12,9 +12,8 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Typography from '@material-ui/core/Typography';
 import PageTitle from '../page-title/page-title';
-import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import './signin.css';
+import PropTypes from 'prop-types';
 
 export class SignIn extends React.Component {
   constructor(props) {
@@ -25,7 +24,6 @@ export class SignIn extends React.Component {
       password: null,
       username: null,
       errors: null,
-      success: null
     };
 
     this.togglePassword = this.togglePassword.bind(this);
@@ -63,8 +61,8 @@ export class SignIn extends React.Component {
     const { username, password } = this.state;
     const errors = {};
 
-    if (username === null || username.trim() === '') errors['username'] = 'Required';
-    if (password === null || password.trim() === '') errors['password'] = 'Required';
+    if (username === null || username.trim() === '') errors['username'] = 'Username is required';
+    if (password === null || password.trim() === '') errors['password'] = 'Password is required';
     if (errors.username || errors.password) {
       this.setState({
         errors: errors
@@ -74,9 +72,9 @@ export class SignIn extends React.Component {
 
     if (this.authenticate(username, password)) {
       this.setState({
-        errors: null,
-        success: true
+        errors: null
       });
+      this.redirect('/');
     } else {
       this.setState({
         errors: {
@@ -86,11 +84,15 @@ export class SignIn extends React.Component {
     }
   }
 
+  redirect(route) {
+    const { history } = this.props;
+    if (history.push) history.push(route);
+  }
+
   render() {
-    const { showPassword, errors, success } = this.state;
+    const { showPassword, errors } = this.state;
     const passHasError = errors != null && errors.password !== null;
     const usernameHasError = errors != null && errors.username !== null;
-    if (success) return <Redirect to={'/'} />
     return (
       <div className="f-container">
         <Grid container spacing={3}>
@@ -98,18 +100,20 @@ export class SignIn extends React.Component {
             <PageTitle title="UniApp" />
           </Grid>
           <Grid item xs={12}>
-            <TextField 
+            <TextField
               fullWidth
               label="Username"
               variant="outlined" 
               error={usernameHasError}
               helperText={usernameHasError ? errors.username : null}
-              onChange={(e) => this.handleChange(e, 'username')} />
+              onChange={(e) => this.handleChange(e, 'username')}
+              InputProps={{inputProps: {'data-testid': 'input-username'}}} />
           </Grid>
           <Grid item xs={12}>
             <FormControl variant="outlined" fullWidth>
               <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
               <OutlinedInput
+                inputProps={{'data-testid': 'input-password'}}
                 id="outlined-adornment-password"
                 type={showPassword ? 'text' : 'password'}
                 onChange={(e) => this.handleChange(e, 'password')}
@@ -136,13 +140,14 @@ export class SignIn extends React.Component {
             <Button 
               fullWidth
               variant="contained" 
-              color="primary" 
+              color="primary"
+              data-testid="btn-sign-in"
               onClick={this.handleSubmit}>
               Sign In
             </Button>
           </Grid>
           <Grid item xs={12}>
-            <Button fullWidth component={Link} to={`register`} color="primary">
+            <Button data-testid="btn-register" fullWidth onClick={() => this.redirect('register')} color="primary">
               Register
             </Button>
           </Grid>
@@ -152,7 +157,7 @@ export class SignIn extends React.Component {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Button fullWidth component={Link} to={`universities`} color="primary">
+            <Button data-testid="btn-guest" fullWidth onClick={() => this.redirect('universities')} color="primary">
               Continue as Guest
             </Button>
           </Grid>
@@ -161,3 +166,7 @@ export class SignIn extends React.Component {
     );
   }
 }
+
+SignIn.propTypes = {
+  history: PropTypes.object.isRequired,
+};
