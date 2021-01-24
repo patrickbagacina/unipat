@@ -1,5 +1,7 @@
+import React from 'react';
 import CustomCard from '../card/card';
 import Empty from '../empty/empty';
+import PropTypes from 'prop-types';
 
 export default function FavoriteList(props) {
   const { universities, onFavorite, enableFavorite } = props;
@@ -24,3 +26,9 @@ export default function FavoriteList(props) {
     </div>
   );
 }
+
+FavoriteList.propTypes = {
+  universities: PropTypes.array.isRequired,
+  onFavorite: PropTypes.func.isRequired,
+  enableFavorite: PropTypes.bool.isRequired,
+};

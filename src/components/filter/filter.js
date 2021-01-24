@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import MediaQuery from 'react-responsive';
+import PropTypes from 'prop-types';
 
 export default class Filter extends React.Component {
   constructor(props) {
@@ -82,3 +83,10 @@ export default class Filter extends React.Component {
     );
   }
 }
+
+Filter.propTypes = {
+  dropdown: PropTypes.object.isRequired,
+  text: PropTypes.object.isRequired,
+  button: PropTypes.object.isRequired,
+  onFilter: PropTypes.func.isRequired,
+};

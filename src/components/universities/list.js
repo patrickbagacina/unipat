@@ -3,6 +3,7 @@ import CustomCard from '../card/card';
 import Empty from '../empty/empty';
 import Button from '@material-ui/core/Button';
 import { Grid } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 export default class UniversityList extends React.Component {
   constructor(props) {
@@ -31,7 +32,8 @@ export default class UniversityList extends React.Component {
     const { universities, onFavorite, isFavorite, enableFavorite } = this.props;
     const show = universities.slice(0, this.state.displayed);
     const cards = show.map((u, index) => {
-      const isActive = isFavorite(u);
+      const f = isFavorite(u);
+      const isActive = f === null || f === undefined ? false : f;
 
       return <CustomCard 
         key={u.name.concat(index)}
@@ -65,3 +67,10 @@ export default class UniversityList extends React.Component {
     );
   }
 }
+
+UniversityList.propTypes = {
+  universities: PropTypes.array.isRequired,
+  onFavorite: PropTypes.func.isRequired,
+  isFavorite: PropTypes.func.isRequired,
+  enableFavorite: PropTypes.bool.isRequired,
+};

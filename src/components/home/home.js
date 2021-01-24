@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from '../navbar/navbar';
 import './home.css';
+import PropTypes from 'prop-types';
 
 export class Home extends React.Component {
   render() {
@@ -14,3 +15,7 @@ export class Home extends React.Component {
     );
   }
 }
+
+Home.propTypes = {
+  children: PropTypes.array.isRequired,
+};

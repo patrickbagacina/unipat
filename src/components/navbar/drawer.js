@@ -1,3 +1,4 @@
+import React from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -8,6 +9,7 @@ import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import AllInboxIcon from '@material-ui/icons/AllInbox';
 import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default function NavDrawer(props) {
   return (
@@ -37,3 +39,8 @@ export default function NavDrawer(props) {
     </Drawer>
   );
 }
+
+NavDrawer.propTypes = {
+  showSidebar: PropTypes.bool.isRequired,
+  toggleSidebar: PropTypes.func.isRequired,
+};

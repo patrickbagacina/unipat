@@ -1,5 +1,7 @@
+import React from 'react';
 import NewsletterCard from './card';
 import Empty from '../empty/empty';
+import PropTypes from 'prop-types';
 
 export default function NewsletterList(props) {
   const { letters, onSelect } = props;
@@ -22,3 +24,8 @@ export default function NewsletterList(props) {
     </div>
   );
 }
+
+NewsletterList.propTypes = {
+  letters: PropTypes.array.isRequired,
+  onSelect: PropTypes.func.isRequired,
+};

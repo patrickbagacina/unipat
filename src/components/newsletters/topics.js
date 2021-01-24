@@ -1,5 +1,7 @@
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { TopicCard } from './card';
+import PropTypes from 'prop-types';
 
 export default function Topics(props) {
   const cards = props.topics.map((t) => 
@@ -13,3 +15,7 @@ export default function Topics(props) {
     </Grid>
   );
 }
+
+Topics.propTypes = {
+  topics: PropTypes.array.isRequired,
+};

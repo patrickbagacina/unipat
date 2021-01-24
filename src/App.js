@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Home } from './components/home/home';
 import { SignIn } from './components/sign-in/signin';
@@ -5,7 +6,6 @@ import { Register } from './components/register/register';
 import { Universities } from './components/universities/universities';
 import { Newsletters } from './components/newsletters/newsletters';
 import { Favorites } from './components/favorites/favorites';
-import { PageNotFound } from './components/not-found/not-found';
 
 function App() {
   return (

@@ -1,5 +1,7 @@
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import './empty.css';
+import PropTypes from 'prop-types';
 
 export default function Empty(props) {
   return (
@@ -14,3 +16,7 @@ export default function Empty(props) {
     </div>
   );
 }
+
+Empty.propTypes = {
+  message: PropTypes.string.isRequired,
+};
