@@ -8,10 +8,14 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import AllInboxIcon from '@material-ui/icons/AllInbox';
 import { Typography } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function NavDrawer(props) {
+  const redirect = (route) => {
+    const { history } = props;
+    if (history.push) history.push(route);
+  }
+
   return (
     <Drawer anchor="left" open={props.showSidebar} onClose={props.toggleSidebar}>
       <div role="presentation"
@@ -22,15 +26,15 @@ export default function NavDrawer(props) {
               UniApp
             </Typography>
           </ListItem>
-          <ListItem button component={Link} to={'universities'}>
+          <ListItem button onClick={() => redirect('universities')}>
             <ListItemIcon><AccountBalanceIcon /></ListItemIcon>
             <ListItemText primary={'Universities'} />
           </ListItem>
-          <ListItem button component={Link} to={'newsletters'}>
+          <ListItem button onClick={() => redirect('newsletters')}>
             <ListItemIcon><AllInboxIcon /></ListItemIcon>
             <ListItemText primary={'Newsletters'} />
           </ListItem>
-          <ListItem button component={Link} to={'favorites'}>
+          <ListItem button onClick={() => redirect('favorites')}>
             <ListItemIcon><FavoriteIcon /></ListItemIcon>
             <ListItemText primary={'Favorites'} />
           </ListItem>
@@ -41,6 +45,7 @@ export default function NavDrawer(props) {
 }
 
 NavDrawer.propTypes = {
+  history: PropTypes.object.isRequired,
   showSidebar: PropTypes.bool.isRequired,
   toggleSidebar: PropTypes.func.isRequired,
 };

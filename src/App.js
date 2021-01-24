@@ -3,9 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Home } from './components/home/home';
 import { SignIn } from './components/sign-in/signin';
 import { Register } from './components/register/register';
-import { Universities } from './components/universities/universities';
-import { Newsletters } from './components/newsletters/newsletters';
-import { Favorites } from './components/favorites/favorites';
+import { PageNotFound } from './components/not-found/not-found';
 
 function App() {
   return (
@@ -13,12 +11,11 @@ function App() {
       <Switch>
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/register" component={Register} />
-        <Home>
-          <Route exact path="/" component={Universities} />
-          <Route path="/universities" component={Universities} />
-          <Route path="/newsletters" component={Newsletters} />
-          <Route path="/favorites" component={Favorites} />
-        </Home>
+        <Route exact path="/" component={Home} />
+        <Route path="/universities" component={Home} />
+        <Route path="/newsletters" component={Home} />
+        <Route path="/favorites" component={Home} />
+        <Route component={PageNotFound} />
       </Switch>
     </Router>
   );

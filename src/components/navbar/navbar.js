@@ -1,10 +1,10 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import { Link, Redirect } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import NavDrawer from './drawer';
+import PropTypes from 'prop-types';
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -12,7 +12,6 @@ export default class NavBar extends React.Component {
 
     this.state = {
       user: null,
-      logout: null,
       showSidebar: false
     };
 
@@ -33,10 +32,10 @@ export default class NavBar extends React.Component {
 
   handleLogout() {
     localStorage.removeItem('currentUser');
+    this.redirect('signin');
 
     this.setState({
       user: null,
-      logout: true,
     });
   }
 
@@ -46,9 +45,13 @@ export default class NavBar extends React.Component {
     this.setState({ showSidebar: !showSidebar });
   }
 
+  redirect(route) {
+    const { history } = this.props;
+    if (history.push) history.push(route);
+  }
+
   render() {
     const { showSidebar } = this.state;
-    if (this.state.logout) return <Redirect to={'/signin'} />
     return (
       <div style={{ flexGrow: 1 }}>
         <AppBar position="static">
@@ -62,7 +65,7 @@ export default class NavBar extends React.Component {
                 aria-label="menu">
                 <MenuIcon />
               </IconButton>
-              <NavDrawer showSidebar={showSidebar} toggleSidebar={this.toggleSidebar} />
+              <NavDrawer history={this.props.history} showSidebar={showSidebar} toggleSidebar={this.toggleSidebar} />
             </React.Fragment>
             
             <Typography variant="h6" style={{ flexGrow: 1 }}>
@@ -73,7 +76,7 @@ export default class NavBar extends React.Component {
                 <Button color="inherit" onClick={this.handleLogout}>
                   Logout
                 </Button> :
-                <Button color="inherit" component={Link} to={`signin`}>
+                <Button color="inherit" onClick={() => this.redirect('signin')}>
                   Login
                 </Button>
             }
@@ -83,3 +86,7 @@ export default class NavBar extends React.Component {
     );
   }
 }
+
+NavBar.propTypes = {
+  history: PropTypes.object.isRequired,
+};
