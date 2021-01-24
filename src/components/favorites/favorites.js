@@ -45,7 +45,7 @@ export class Favorites extends React.Component {
   handleFavorite(university) {
     const user = this.getUser();
     if (!user) return;
-    if (!user.favorites) user.favorites = [];
+    if (user.favorites === null || user.favorites === undefined) user.favorites = [];
 
     const i = user.favorites.findIndex((f) => f.country === university.country && f.name === university.name);
     if (i > -1) user.favorites.splice(i, 1);

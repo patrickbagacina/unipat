@@ -27,6 +27,7 @@ export default function CustomCard(props) {
             <Grid item xs={isMobile ? 2 : 1}>
               <IconButton 
                 aria-label="favorite"
+                data-testid="btn-favorite"
                 onClick={onClick}>
                 <FavoriteIcon 
                   fontSize="default" 
