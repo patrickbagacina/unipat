@@ -6,9 +6,13 @@ import PropTypes from 'prop-types';
 export default function SearchableDropdown(props) {
   return (
     <Autocomplete
+      data-testid="s-dropdown"
       options={props.options}
       getOptionLabel={(option) => option.name}
-      renderInput={(params) => <TextField {...params} label={props.label} variant="outlined" />}
+      renderInput={(params) => <TextField 
+        {...params} 
+        label={props.label} 
+        variant="outlined" />}
       onChange={props.onChange}
     />
   );

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 export default function PageTitle(props) {
   return (
-    <Typography variant="h3" className="title">
+    <Typography variant="h3" className="title" data-testid="title">
       {props.title}
     </Typography>
   );

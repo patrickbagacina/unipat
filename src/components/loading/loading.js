@@ -12,7 +12,7 @@ export default function Loading(props) {
           <CircularProgress />
         </Grid>
         <Grid item xs={12} className="container">
-          <label>{props.label}</label>
+          <label data-testid="label">{props.label}</label>
         </Grid>
       </Grid>
     </div>

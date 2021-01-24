@@ -20,7 +20,7 @@ export default function FavoriteList(props) {
     <div>
       {
         universities.length === 0 ? 
-          <Empty message="No Favorites Added Yet." /> :
+          <Empty data-testid="fl-empty" message="No Favorites Added Yet." /> :
           cards
       }
     </div>
