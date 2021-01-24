@@ -12,7 +12,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Alert from '@material-ui/lab/Alert';
 import PageTitle from '../page-title/page-title';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export class Register extends React.Component {
   constructor(props) {
@@ -73,8 +73,8 @@ export class Register extends React.Component {
     const { username, password } = this.state;
     const errors = {};
 
-    if (username === null || username.trim() === '') errors['username'] = 'Required';
-    if (password === null || password.trim() === '') errors['password'] = 'Required';
+    if (username === null || username.trim() === '') errors['username'] = 'Username is required';
+    if (password === null || password.trim() === '') errors['password'] = 'Password is required';
     if (errors.username || errors.password) {
       this.setState({
         errors: errors
@@ -95,6 +95,11 @@ export class Register extends React.Component {
         }
       });
     }
+  }
+
+  redirect(route) {
+    const { history } = this.props;
+    if (history.push) history.push(route);
   }
 
   render() {
@@ -120,13 +125,15 @@ export class Register extends React.Component {
               variant="outlined" 
               error={usernameHasError}
               helperText={usernameHasError ? errors.username : null}
-              onChange={(e) => this.handleChange(e, 'username')} />
+              onChange={(e) => this.handleChange(e, 'username')}
+              InputProps={{inputProps: {'data-testid': 'input-username'}}} />
           </Grid>
           <Grid item xs={12}>
             <FormControl variant="outlined" fullWidth>
               <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
+                inputProps={{'data-testid': 'input-password'}}
                 type={showPassword ? 'text' : 'password'}
                 onChange={(e) => this.handleChange(e, 'password')}
                 error={passHasError}
@@ -149,7 +156,8 @@ export class Register extends React.Component {
             </FormControl>
           </Grid>
           <Grid item xs={12}>
-            <Button 
+            <Button
+              data-testid="btn-register"
               fullWidth
               variant="contained" 
               color="primary" 
@@ -158,7 +166,7 @@ export class Register extends React.Component {
             </Button>
           </Grid>
           <Grid item xs={12}>
-          <Button fullWidth component={Link} to={`signin`} color="primary">
+          <Button fullWidth onClick={() => this.redirect('signin')} color="primary">
             Sign In
           </Button>
           </Grid>
@@ -167,3 +175,7 @@ export class Register extends React.Component {
     );
   }
 }
+
+Register.propTypes = {
+  history: PropTypes.object.isRequired,
+};
