@@ -1,11 +1,9 @@
 import CustomCard from '../card/card';
 import Empty from '../empty/empty';
 
-export default function UniversityList(props) {
-  const { universities, onFavorite, isFavorite, enableFavorite } = props;
+export default function FavoriteList(props) {
+  const { universities, onFavorite, enableFavorite } = props;
   const cards = universities.map((u, index) => {
-    const isActive = isFavorite(u);
-
     return <CustomCard 
       key={u.name.concat(index)}
       title={u.name} 
@@ -13,14 +11,14 @@ export default function UniversityList(props) {
       links={u.web_pages}
       enableButton={enableFavorite}
       onClick={ () => onFavorite(u) }
-      isActive={isActive} />
+      isActive={true} />
   });
 
   return (
     <div>
       {
         universities.length === 0 ? 
-          <Empty message="No Universities Found." /> :
+          <Empty message="No Favorites Added Yet." /> :
           cards
       }
     </div>

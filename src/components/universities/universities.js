@@ -5,22 +5,31 @@ import config from '../../config.json';
 import Loading from '../loading/loading';
 import UniversityList from './list';
 import Filter from '../filter/filter';
+import Empty from '../empty/empty';
 
 export class Universities extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
+      initial: true,
+      loading: false,
       universities: [],
       error: null,
+      user: null
     };
 
     this.loadUniversities = this.loadUniversities.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
+    this.handleFavorite = this.handleFavorite.bind(this);
+    this.isFavorite = this.isFavorite.bind(this);
   }
 
   componentDidMount() {
-    this.loadUniversities();
+    const user = this.getUser();
+
+    if (user) {
+      this.setState({user: user});
+    }
   }
 
   appendUrl(url, country, name) {
@@ -51,16 +60,59 @@ export class Universities extends React.Component {
       );
   }
 
+  getUser() {
+    const u = localStorage.getItem('currentUser');
+
+    if (!u) return null;
+
+    return JSON.parse(u);
+  }
+
   handleFilter(filter) {
     this.setState({
       loading: true,
+      initial: false
     });
     const url = this.appendUrl(`${config.server.baseUrl}/search`, filter.dropdown, filter.text);
     this.loadUniversities(url);
   }
 
+  handleFavorite(university) {
+    const user = this.getUser();
+    if (!user) return;
+    if (!user.favorites) user.favorites = [];
+
+    if (!this.isFavorite(university)) user.favorites.push(university);
+    else {
+      const ind = user.favorites.findIndex((f) => f.country === university.country && f.name === university.name);
+      if (ind > -1) user.favorites.splice(ind, 1);
+    }
+
+    this.setState({
+      user: user
+    });
+
+    // update current user in local storage
+    localStorage.setItem('currentUser', JSON.stringify(user));
+
+    // update user in users
+    const u = localStorage.getItem('users');
+    const users = JSON.parse(u);
+    const ind = users.findIndex((us) => us.username === user.username);
+    if (ind === -1) return;
+    users[ind] = user;
+    localStorage.setItem('users', JSON.stringify(users));
+  }
+
+  isFavorite(university) {
+    const user = this.getUser();
+    if (!user || !user.favorites) return false;
+    
+    return user.favorites.find((f) => f.name === university.name && f.country === university.country) && true;
+  }
+
   render() {
-    const { loading, universities } = this.state;
+    const { initial, loading, universities, user } = this.state;
     return (
       <div>
         <PageTitle title="Universities" />
@@ -70,9 +122,15 @@ export class Universities extends React.Component {
           button={{label: 'Filter Universities'}}
           onFilter={this.handleFilter} />
         {
+          initial ? <Empty message="Please apply filters to list some universities." /> :
           loading 
             ? <Loading label="Fetching universities..." />
-            : <UniversityList universities={universities} />
+            : <UniversityList 
+                universities={universities} 
+                enableFavorite={user !== null}
+                onFavorite={this.handleFavorite}
+                isFavorite={this.isFavorite}
+              />
         }
       </div>
     );
