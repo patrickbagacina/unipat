@@ -3,6 +3,7 @@ import SearchableDropdown from '../searchable-dropdown/searchable-dropdown';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import MediaQuery from 'react-responsive';
 
 export default class Filter extends React.Component {
   constructor(props) {
@@ -33,21 +34,40 @@ export default class Filter extends React.Component {
       <div>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Grid container spacing={3}>
-              <Grid item xs={6}>
-                <SearchableDropdown 
-                  label={dropdown.label} 
-                  options={dropdown.options} 
-                  onChange={this.handleDropdownChange} />
+            <MediaQuery maxDeviceWidth={600}>
+              <Grid container spacing={1}>
+                <Grid item xs={12}>
+                  <SearchableDropdown 
+                    label={dropdown.label} 
+                    options={dropdown.options} 
+                    onChange={this.handleDropdownChange} />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField 
+                    fullWidth
+                    label={text.label} 
+                    variant="outlined" 
+                    onChange={this.handleTextChange} />
+                </Grid>
               </Grid>
-              <Grid item xs={6}>
-                <TextField 
-                  fullWidth
-                  label={text.label} 
-                  variant="outlined" 
-                  onChange={this.handleTextChange} />
+            </MediaQuery>
+            <MediaQuery minDeviceWidth={601}>
+              <Grid container spacing={3}>
+                <Grid item xs={6}>
+                  <SearchableDropdown 
+                    label={dropdown.label} 
+                    options={dropdown.options} 
+                    onChange={this.handleDropdownChange} />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField 
+                    fullWidth
+                    label={text.label} 
+                    variant="outlined" 
+                    onChange={this.handleTextChange} />
+                </Grid>
               </Grid>
-            </Grid>
+            </MediaQuery>
           </Grid>
           <Grid item xs={12}>
             <Button 
