@@ -80,7 +80,7 @@ export class Favorites extends React.Component {
 
     return (
       <div>
-        <PageTitle title="Favorites" />
+        <PageTitle data-testid="pt-favorites" title="Favorites" />
         { content }
       </div>
     );

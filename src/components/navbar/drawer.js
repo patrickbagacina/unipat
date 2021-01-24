@@ -14,6 +14,7 @@ export default function NavDrawer(props) {
   const redirect = (route) => {
     const { history } = props;
     if (history.push) history.push(route);
+    props.toggleSidebar();
   }
 
   return (
@@ -22,11 +23,11 @@ export default function NavDrawer(props) {
         style={{ width: 250 }}>
         <List>
           <ListItem>
-            <Typography variant="h6" style={{ flexGrow: 1 }}>
+            <Typography data-testid="d-title" variant="h6" style={{ flexGrow: 1 }}>
               UniApp
             </Typography>
           </ListItem>
-          <ListItem button onClick={() => redirect('universities')}>
+          <ListItem data-testid="d-li-universities" button onClick={() => redirect('universities')}>
             <ListItemIcon><AccountBalanceIcon /></ListItemIcon>
             <ListItemText primary={'Universities'} />
           </ListItem>

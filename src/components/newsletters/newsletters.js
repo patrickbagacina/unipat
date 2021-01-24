@@ -55,7 +55,7 @@ export class Newsletters extends React.Component {
 
     return (
       <div>
-        <PageTitle title="Newsletters" />
+        <PageTitle data-testid="pt-newsletters" title="Newsletters" />
         { content }
       </div>
     );

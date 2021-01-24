@@ -73,10 +73,10 @@ export default class NavBar extends React.Component {
             </Typography>
             {
               this.state.user ?
-                <Button color="inherit" onClick={this.handleLogout}>
+                <Button color="inherit" data-testid="btn-logout" onClick={this.handleLogout}>
                   Logout
                 </Button> :
-                <Button color="inherit" onClick={() => this.redirect('signin')}>
+                <Button color="inherit" data-testid="btn-login" onClick={() => this.redirect('signin')}>
                   Login
                 </Button>
             }

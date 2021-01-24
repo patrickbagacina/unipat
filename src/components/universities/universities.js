@@ -115,7 +115,7 @@ export class Universities extends React.Component {
     const { initial, loading, universities, user } = this.state;
     return (
       <div>
-        <PageTitle title="Universities" />
+        <PageTitle data-testid="pt-universities" title="Universities" />
         <Filter  
           dropdown={{label: 'Country', options: countries}}
           text={{label: 'University Name'}} 
