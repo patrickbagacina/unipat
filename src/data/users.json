@@ -1,4 +1,78 @@
 {
-  "newsletters": [],
-  "users": []
+  "newsletters": [
+    {
+      "id": 1,
+      "date": "12/12/2020",
+      "school": {
+        "name": "Information and Communications Technology Academy",
+        "country": "Philippines"
+      },
+      "content": {
+        "bannerImg": "https://www.raindeocampo.com/wp-content/uploads/2018/08/P1110925.jpg",
+        "topics": [
+          {
+            "id": 1,
+            "author": "John Patrick Bagacina",
+            "title": "Studying organic farms",
+            "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel ultricies felis. Mauris velit massa, porttitor ut venenatis eu, molestie eget lacus. Etiam efficitur lacus at congue consectetur. Aenean tempus, magna maximus lacinia pulvinar, risus lectus egestas ligula, sed faucibus odio lorem ultricies leo"
+          },
+          {
+            "id": 2,
+            "author": "John Patrick Bagacina",
+            "title": "The monthly recap",
+            "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel ultricies felis. Mauris velit massa, porttitor ut venenatis eu, molestie eget lacus. Etiam efficitur lacus at congue consectetur. Aenean tempus, magna maximus lacinia pulvinar, risus lectus egestas ligula, sed faucibus odio lorem ultricies leo"
+          },
+          {
+            "id": 3,
+            "author": "John Patrick Bagacina",
+            "title": "New campus regulations",
+            "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel ultricies felis. Mauris velit massa, porttitor ut venenatis eu, molestie eget lacus. Etiam efficitur lacus at congue consectetur. Aenean tempus, magna maximus lacinia pulvinar, risus lectus egestas ligula, sed faucibus odio lorem ultricies leo"
+          }
+        ],
+        "featured": {
+          "title": "Tips on putting together a college portfolio",
+          "bannerImg": "https://i0.wp.com/www.nognoginthecity.com/wp-content/uploads/2014/09/iacademy-students-2-of-2.jpg?fit=1600%2C1067&ssl=1",
+          "author": "John Patrick Bagacina",
+          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel ultricies felis. Mauris velit massa, porttitor ut venenatis eu, molestie eget lacus. Etiam efficitur lacus at congue consectetur. Aenean tempus, magna maximus lacinia pulvinar, risus lectus egestas ligula, sed faucibus odio lorem ultricies leo. Suspendisse lacinia felis id ante aliquet mollis. Donec metus ex, suscipit vitae sodales in, porttitor sagittis felis. Morbi eu viverra velit. Proin quis lacus ut nulla lobortis eleifend. Nam imperdiet scelerisque malesuada. Nunc convallis euismod tortor, et vehicula sapien laoreet eu. Duis scelerisque neque aliquam tellus pretium, vitae finibus eros gravida. Phasellus ornare lacinia consequat."
+        }
+      }
+    },
+    {
+      "id": 2,
+      "date": "12/12/2020",
+      "school": {
+        "name": "University of the Philippines Manila",
+        "country": "Philippines"
+      },
+      "content": {
+        "bannerImg": "https://qph.fs.quoracdn.net/main-qimg-263c6bff9ea27d8d0c4e13c63bd3961a",
+        "topics": [
+          {
+            "id": 1,
+            "author": "John Patrick Bagacina",
+            "title": "Studying organic farms",
+            "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel ultricies felis. Mauris velit massa, porttitor ut venenatis eu, molestie eget lacus. Etiam efficitur lacus at congue consectetur. Aenean tempus, magna maximus lacinia pulvinar, risus lectus egestas ligula, sed faucibus odio lorem ultricies leo"
+          },
+          {
+            "id": 2,
+            "author": "John Patrick Bagacina",
+            "title": "The monthly recap",
+            "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel ultricies felis. Mauris velit massa, porttitor ut venenatis eu, molestie eget lacus. Etiam efficitur lacus at congue consectetur. Aenean tempus, magna maximus lacinia pulvinar, risus lectus egestas ligula, sed faucibus odio lorem ultricies leo"
+          },
+          {
+            "id": 3,
+            "author": "John Patrick Bagacina",
+            "title": "New campus regulations",
+            "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel ultricies felis. Mauris velit massa, porttitor ut venenatis eu, molestie eget lacus. Etiam efficitur lacus at congue consectetur. Aenean tempus, magna maximus lacinia pulvinar, risus lectus egestas ligula, sed faucibus odio lorem ultricies leo"
+          }
+        ],
+        "featured": {
+          "title": "Tips on putting together a college portfolio",
+          "bannerImg": "https://i0.wp.com/www.nognoginthecity.com/wp-content/uploads/2014/09/iacademy-students-2-of-2.jpg?fit=1600%2C1067&ssl=1",
+          "author": "John Patrick Bagacina",
+          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel ultricies felis. Mauris velit massa, porttitor ut venenatis eu, molestie eget lacus. Etiam efficitur lacus at congue consectetur. Aenean tempus, magna maximus lacinia pulvinar, risus lectus egestas ligula, sed faucibus odio lorem ultricies leo. Suspendisse lacinia felis id ante aliquet mollis. Donec metus ex, suscipit vitae sodales in, porttitor sagittis felis. Morbi eu viverra velit. Proin quis lacus ut nulla lobortis eleifend. Nam imperdiet scelerisque malesuada. Nunc convallis euismod tortor, et vehicula sapien laoreet eu. Duis scelerisque neque aliquam tellus pretium, vitae finibus eros gravida. Phasellus ornare lacinia consequat."
+        }
+      }
+    }
+  ]
 }
