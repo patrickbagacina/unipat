@@ -17,7 +17,7 @@ export default function NavDrawer(props) {
         <List>
           <ListItem>
             <Typography variant="h6" style={{ flexGrow: 1 }}>
-              Unipat
+              UniApp
             </Typography>
           </ListItem>
           <ListItem button component={Link} to={'universities'}>

@@ -10,8 +10,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import Typography from '@material-ui/core/Typography';
+import PageTitle from '../page-title/page-title';
 import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import './signin.css';
 
 export class SignIn extends React.Component {
   constructor(props) {
@@ -89,60 +92,72 @@ export class SignIn extends React.Component {
     const usernameHasError = errors != null && errors.username !== null;
     if (success) return <Redirect to={'/'} />
     return (
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <h1>Sign In</h1>
+      <div className="f-container">
+        <Grid container spacing={3}>
+          <Grid item xs={12} className="center">
+            <PageTitle title="UniApp" />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField 
+              fullWidth
+              label="Username"
+              variant="outlined" 
+              error={usernameHasError}
+              helperText={usernameHasError ? errors.username : null}
+              onChange={(e) => this.handleChange(e, 'username')} />
+          </Grid>
+          <Grid item xs={12}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={showPassword ? 'text' : 'password'}
+                onChange={(e) => this.handleChange(e, 'password')}
+                error={passHasError}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={this.togglePassword}
+                      onMouseDown={this.togglePassword}
+                      edge="end"
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                labelWidth={70}
+              />
+              {passHasError && <FormHelperText error id="component-error-text">{errors.password}</FormHelperText>}
+              {errors && errors.message && <FormHelperText error id="component-error-text">{errors.message}</FormHelperText>}
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <Button 
+              fullWidth
+              variant="contained" 
+              color="primary" 
+              onClick={this.handleSubmit}>
+              Sign In
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <Button fullWidth component={Link} to={`register`} color="primary">
+              Register
+            </Button>
+          </Grid>
+          <Grid item xs={12} className="center">
+            <Typography variant="body2" component="p">
+              or
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Button fullWidth component={Link} to={`universities`} color="primary">
+              Continue as Guest
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <TextField 
-            fullWidth
-            label="Username"
-            variant="outlined" 
-            error={usernameHasError}
-            helperText={usernameHasError ? errors.username : null}
-            onChange={(e) => this.handleChange(e, 'username')} />
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl variant="outlined" fullWidth>
-            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-password"
-              type={showPassword ? 'text' : 'password'}
-              onChange={(e) => this.handleChange(e, 'password')}
-              error={passHasError}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={this.togglePassword}
-                    onMouseDown={this.togglePassword}
-                    edge="end"
-                  >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              labelWidth={70}
-            />
-            {passHasError && <FormHelperText error id="component-error-text">{errors.password}</FormHelperText>}
-            {errors && errors.message && <FormHelperText error id="component-error-text">{errors.message}</FormHelperText>}
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <Button 
-            fullWidth
-            variant="contained" 
-            color="primary" 
-            onClick={this.handleSubmit}>
-            Sign In
-          </Button>
-        </Grid>
-        <Grid item xs={12}>
-        <Button fullWidth component={Link} to={`register`} color="primary">
-          Register
-        </Button>
-        </Grid>
-      </Grid>
+      </div> 
     );
   }
 }

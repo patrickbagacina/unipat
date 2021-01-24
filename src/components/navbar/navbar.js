@@ -66,7 +66,7 @@ export default class NavBar extends React.Component {
             </React.Fragment>
             
             <Typography variant="h6" style={{ flexGrow: 1 }}>
-              Unipat
+              UniApp
             </Typography>
             {
               this.state.user ?
