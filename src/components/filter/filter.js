@@ -72,6 +72,7 @@ export default class Filter extends React.Component {
           </Grid>
           <Grid item xs={12}>
             <Button 
+              data-testid="btn-filter"
               variant="contained" 
               color="primary" 
               onClick={() => onFilter({dropdown: this.state.dropdown, text: this.state.text}) }>
