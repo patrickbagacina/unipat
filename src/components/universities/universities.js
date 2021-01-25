@@ -6,14 +6,15 @@ import Loading from '../loading/loading';
 import UniversityList from './list';
 import Filter from '../filter/filter';
 import Empty from '../empty/empty';
+import PropTypes from 'prop-types';
 
 export class Universities extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      initial: true,
+      initial: props.initial ? false : true,
       loading: false,
-      universities: [],
+      universities: props.initial ? props.initial : [],
       error: null,
       user: null
     };
@@ -136,3 +137,7 @@ export class Universities extends React.Component {
     );
   }
 }
+
+Universities.propTypes = {
+  initial: PropTypes.array
+};
