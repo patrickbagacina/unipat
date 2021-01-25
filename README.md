@@ -15,7 +15,7 @@ A react web application that gives its users the capability to:
 cd unipat/
 npm install
 ```
-2. Once finished, run the app bu executing:
+2. Once finished, run the app by executing:
 ```bash
 npm run start
 ```
